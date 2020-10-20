@@ -1,0 +1,27 @@
+
+<h1>Listing Accounts</h1>
+ 
+<%= form_tag({:action => :upload}, :multipart => true) do %>
+  <%= file_field_tag 'ofx_file' %>
+  <%= submit_tag 'Upload'%>
+<% end %> 
+<hr>
+ 
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Last Import Date</th>
+	<th>Balance</th>
+  </tr>
+ 
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= account.name %></td>
+	  <td><%= account.last_import_date %></td>
+	  <td><%= number_to_currency(account.balance) %></td>
+	  <td><%= link_to 'Destroy', account_path(account),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

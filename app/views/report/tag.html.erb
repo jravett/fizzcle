@@ -1,0 +1,34 @@
+<h1> Tag Report </h1>
+<%= form_tag :action=>'tag' do %>
+	<%= text_field_tag :tag_name %>
+	<%= select_month @start_date %>
+	<%= select_year(@start_date, :start_year => (Date.today.year-3), :end_year => Date.today.year) %>
+	<%= submit_tag 'get report'%>
+<%end%>
+
+<b>
+<%=@tag_name%><br>
+<%=number_to_currency(@sum)%>
+</b>
+
+<% if @txs%>
+<table border=0 cellpadding=5>
+<tr>
+<th>Date</th>
+<th>Payee</th>
+<th>Amount</th>
+</tr>
+
+<% for tx in @txs %>
+<tr>
+<td><%=tx.date%></td>
+<td><%=tx.payee.friendly_name%></td>
+<td><%= number_to_currency(tx.amount) %></td>
+</tr>
+<% end %>
+
+</table>
+<% end %>
+<p>
+
+

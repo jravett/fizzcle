@@ -1,0 +1,37 @@
+<h1>Transactions#edit</h1>
+<p>Find me in app/views/transactions/edit.html.erb</p>
+
+<%= debug @tx %>
+
+<%= form_for @tx do |form| %>
+
+
+<p>
+<fieldset>
+  <label>Date:</label>
+  <%= form.text_field :date %>
+</p>
+
+<p>  <label>Payee(friendly):</label>
+<%= fields_for @tx.payee do |payee_fields| %>
+  <%=payee_fields.text_field :friendly_name%>
+  <% end %>
+Originally: <i><%= @tx.payee.name %></i>
+</p>
+
+<p>
+  <label>Amount:</label>
+  <%= form.text_field :amount %>
+</p>
+
+<p>
+  <label>Tags:</label>
+  <%= form.text_field :tag_list %>
+</p>
+
+
+<%= form.submit "Submit"%>
+<%= link_to "cancel", transactions_path %>
+</fieldset>
+
+<% end %>

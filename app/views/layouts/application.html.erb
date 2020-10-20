@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fizzcle</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+	<span class="highlight">
+	<table border=0>
+
+	<tr>
+	<th><%= image_tag "/images/dollar_sign1.jpg" %></th>
+	<th width="200"><%= link_to "Fizzcle Home Page", :controller=> "main", :action=>"index" %></th> 
+	<th width="200"><%= link_to "View Accounts", :controller=>"accounts", :action=>"index" %></th>
+	<th width="200"><%= link_to "View Register", :controller=>"transactions", :action=>"index" %></th>
+	<th width="200"><%= link_to "View Reports", :controller=>"report", :action=>"index" %></th>
+<%#	<th width="200"><%= link_to "logout", {:controller=> "user", :action=>"logout"} %></th>
+	</tr>
+
+	</table>
+
+	</span>
+
+	<hr />
+	<% if flash[:notice] %>
+	  <p class="notice"><%= flash[:notice] %></p>
+	<% end %>
+	<%= yield %>
+	<p>
+	<hr />
+	<i>copyright 2020
+  </body>
+</html>

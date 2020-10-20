@@ -1,0 +1,23 @@
+<h1> Summary Report </h1>
+<%= form_tag :action=>'monthly_summary' do %>
+	<%= select_month @start_date%>
+	<%= select_year(@start_date, :start_year => (Date.today.year-3), :end_year => Date.today.year) %>
+	<%= submit_tag 'change date'%>
+<%end%>
+
+<table border=0 cellpadding=5>
+<tr>
+<th>Tag</th> <th>Amount</th>
+</tr>
+
+<% @tag_amounts.each do |key, value| %>
+<tr>
+<td><%= key %></td>
+<td><%= number_to_currency(value) %></td>
+</tr>
+<% end %>
+
+</table>
+<p>
+<%= link_to "Reporting Home", :action=>"index" %>
+

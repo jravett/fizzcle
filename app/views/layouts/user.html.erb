@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fizzcle</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+  
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+<h1>
+<%= image_tag "/images/dollar_sign1.jpg" %>
+<b>Fizzcle</b>
+</h1>
+<hr />
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<%= yield %>
+<p>
+<hr />
+<i>copyright 2017(c)</i>
+</body>
+</html>

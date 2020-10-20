@@ -1,0 +1,19 @@
+<style>
+form label{
+display: inline-block;
+width: 100px;
+font-weight: bold;
+}
+</style>
+
+<%= form_tag('/user/login') do %>
+
+  <%= label_tag 'User Name:'%>
+  <%= text_field_tag :login %>
+<p>
+  <%= label_tag 'Password:'%>
+  <%= password_field_tag :password %>
+
+<%= submit_tag 'Log In'%>
+
+<% end %>
