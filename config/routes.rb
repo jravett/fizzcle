@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   
   get '/user/login' #, to: 'patients#show'
   post '/user/login', to: 'user#login'
+  get '/user/logout', to: 'user#logout'
   post '/report/tag', to: 'report#tag'
   post '/report/monthly_summary', to: 'report#monthly_summary'
   post '/accounts/upload', to: 'accounts#upload'
