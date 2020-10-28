@@ -17,13 +17,13 @@
  
   <% @txs.each do |transaction| %>
     <tr>
-      <td><%= transaction.date %></td>
-	  <td><%= transaction.payee.friendly_name %></td>
+      <td><%= transaction.date %></td>  
+	  <% tx_payee = transaction.payee %>
+	  <td><%= best_in_place tx_payee, :friendly_name %></td>
       <td><%= number_to_currency(transaction.amount) %></td>
-<!--  <td><%= transaction.tag_list %></td> -->
 	  <td><%= best_in_place transaction, :tag_list, :place_holder => "(tag)" %></td>
 	  <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-	  <td><%= link_to 'Destroy', transaction_path(transaction),
+	  <td><%= link_to 'Delete', transaction_path(transaction),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
     </tr>

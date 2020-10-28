@@ -1,8 +1,6 @@
 class TransactionsController < ApplicationController
   def index
   
- #   @txs = Transaction.all
-	
 	unless session[:active_month]
 		session[:active_month] = Date.today.month
 	end
@@ -51,17 +49,26 @@ class TransactionsController < ApplicationController
 	
 	tx.update(transaction_params)
 	
-	respond_to do |format|	
+	p=tx.payee
+	p.last_tag = tx.tag_list.to_s
+	p.save
 	
-	  format.html do
-		p=tx.payee
-		p.friendly_name = params[:payee][:friendly_name]
-		p.save
-		#go back to the register
-		redirect_to transactions_url 
-	  end
-	  
-	  format.json { head :no_content }
+	respond_to do |format|	
+		
+		format.html do
+		  logger.debug "JVR: NOT doing ajax..."
+
+		  p.friendly_name = params[:payee][:friendly_name]
+		  p.save
+
+		  #go back to the register
+		  redirect_to transactions_url 
+		end
+
+		format.json do
+		  logger.debug "JVR: doing ajax...#{tx.tag_list.to_s}"
+		  head :no_content
+		end
 	  
 	 end
   end

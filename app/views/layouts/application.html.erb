@@ -7,6 +7,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	
+	<%= stylesheet_link_tag 'fizzcle' %>
   </head>
 
   <body>
@@ -20,6 +22,7 @@
 	<th width="200"><%= link_to "View Accounts", :controller=>"accounts", :action=>"index" %></th>
 	<th width="200"><%= link_to "View Register", :controller=>"transactions", :action=>"index" %></th>
 	<th width="200"><%= link_to "View Reports", :controller=>"report", :action=>"index" %></th>
+	<th width="200"><%= link_to "View Payees", :controller=>"payees", :action=>"index" %></th>
 	<th width="200"><%= link_to "logout", {:controller=> "user", :action=>"logout"} %>
 	</tr>
 

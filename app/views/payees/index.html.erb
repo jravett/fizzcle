@@ -1,0 +1,23 @@
+<h1>Payees#index</h1>
+
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Friendly Name</th>
+	<th>Create Date</th>
+	<th>Last Tag</th>
+	<th>Transactions</th>
+  </tr>
+ 
+  <% @payees.each do |payee| %>
+    <tr>
+      <td><%= payee.name %></td>
+	  <td><%= best_in_place payee, :friendly_name %></td>
+	  <td><%= payee.created_at %></td>
+	  <td><%= payee.last_tag %></td>
+	  <td><%= payee.transactions.count %></td>
+    </tr>
+  <% end %>
+</table>
+
+

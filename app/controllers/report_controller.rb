@@ -15,8 +15,7 @@ class ReportController < ApplicationController
 			@month=Date.today.month
 			@year=Date.today.year
 		end
-		
-		
+			
 		@start_date = Date.new(@year.to_i, @month.to_i, 1)
 		@end_date = @start_date.end_of_month
 				
@@ -37,7 +36,6 @@ class ReportController < ApplicationController
 		end
 		
 		# sort by amount
-#		@tag_amounts.sort_by { |tag, amount| amount }
 		@tag_amounts.sort { |l, r| l[1]<=>r[1] }
 		
 		@title = Date::MONTHNAMES[@month.to_i].to_s + " " + @year.to_s
@@ -55,7 +53,6 @@ class ReportController < ApplicationController
 		
 		logger.debug "JVR: Finding transactions for #{@tag_name} between #{@start_date} and #{@end_date}..."
 		
-	#	@txs = Transaction.tagged_with(@tag_name, :conditions=>{:date=>(@start_date)..(@end_date)})
 		@txs = Transaction.tagged_with(@tag_name).where( {:date=>(@start_date)..(@end_date)} )
 		
 		@sum=0
@@ -76,7 +73,6 @@ class ReportController < ApplicationController
 		@end_date = @start_date.end_of_year
 
 		@tag_name = params[:tag_name]
-	#	@txs = Transaction.find_tagged_with(@tag_name, :conditions=>{:date=>(@start_date)..(@end_date)}, :order=>"date ASC")
 		@txs = Transaction.tagged_with(@tag_name).where( {:date=>(@start_date)..(@end_date)} )
 		
 		@count=@txs.count
@@ -87,9 +83,8 @@ class ReportController < ApplicationController
 		@year=Date.today.year
 		@start_date = Date.new(@year, 1, 1)
 	end
-  
+
   end
   
-  
-  end
+end
  

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'payees/index'
+  get 'payees/edit'
   get 'report/tag'
   get 'report/year_tag'
   get 'report/monthly_summary'
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :transactions
   resources :report
+  resources :payees
 
   
   get '/user/login' #, to: 'patients#show'
