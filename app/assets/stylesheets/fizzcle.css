@@ -16,10 +16,10 @@ html {
 body { 
 	font: georgia, sans-serif;
 	line-height: 1.88889;
-	color: #555753; 
-	background: #fff url(http://csszengarden.com/001/blossoms.jpg) no-repeat bottom right; 
+	color: #DCDCDC; 
 	margin: 0; 
 	padding: 0;
+	background-color: #121212;
 	}
 p { 
 	margin-top: 0; 
@@ -48,9 +48,50 @@ a:hover, a:focus, a:active {
 abbr {
 	border-bottom: none;
 	}
+	
+input[type=text],input[type=password],select {
+
+  background-color: lightgrey;
+}
+
+input[type=submit] {
+  background-color: lightgrey;
+  border: none;
+  color: black;
+  padding: 4px 8px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
 
 
 /* specific divs */
+
+.notice{
+	color: crimson;
+}
+
+.log-form {
+  min-width: 320px;
+  max-width: 475px;
+  background: grey;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 5px 10px #888888;
+  display: block;
+  padding: 3em;
+  }
+  
+
+.MainMenu {
+  background-color: #383838;
+  text-align: center;
+  color: white; 
+}
+
 .page-wrapper { 
 	background: url(http://csszengarden.com/001/zen-bg.jpg) no-repeat top left; 
 	padding: 0 175px 0 110px;  

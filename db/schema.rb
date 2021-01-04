@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_201246) do
+ActiveRecord::Schema.define(version: 2020_10_29_171153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2020_10_16_201246) do
     t.string "ofx_FI"
     t.string "ofx_ACCTID"
     t.decimal "balance", precision: 8, scale: 2
+  end
+
+  create_table "fuzzies", force: :cascade do |t|
+    t.string "fuzzy_text"
+    t.string "payee_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payees", force: :cascade do |t|

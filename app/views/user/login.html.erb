@@ -1,11 +1,12 @@
 <style>
 form label{
 display: inline-block;
-width: 100px;
+width: 100%;
 font-weight: bold;
+color: black;
 }
 </style>
-
+<div class="log-form">
 <%= form_tag('/user/login') do %>
 
   <%= label_tag 'User Name:'%>
@@ -17,3 +18,4 @@ font-weight: bold;
 <%= submit_tag 'Log In'%>
 
 <% end %>
+</div>

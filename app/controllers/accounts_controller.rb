@@ -88,10 +88,12 @@ class AccountsController < ApplicationController
 					tx.date = t.date
 					tx.account=account
 					tx.guid = t.fit_id
+					
 					unless (tx.payee.last_tag.blank?)
 						tx.tag_list=tx.payee.last_tag.split(/, /)
 						tx_auto_tagged +=1
 					end
+					
 					tx.save
 				end
 			end
@@ -111,12 +113,46 @@ class AccountsController < ApplicationController
 	if (payee)
 		logger.info 'payee ' + raw_name + ' already exists'
 	else
-		logger.info 'payee ' + raw_name + ' does not exist and will be created'
-		payee = Payee.create(:name=>raw_name, :friendly_name=>raw_name )
+		logger.info 'payee ' + raw_name + ' does not exist'
+		
+		special_payee = special_case(raw_name)
+		
+		if special_payee
+		  payee = special_payee
+		else
+		  payee = Payee.create(:name=>raw_name, :friendly_name=>raw_name )
+		end
 	end	
 	
-	return payee
-		
-end
+	return payee	
+  end
   
+  def special_case (raw_name)
+  
+	special_payee = nil
+	
+	fuzzies = Fuzzy.all
+	
+	fuzzies.each do |f| 
+	  if raw_name.start_with?(f.fuzzy_text)
+	    logger.debug "JVR: fuzzy found! -> #{raw_name}"
+		
+		# see if it already exists in the db
+	  	p=Payee.where(:name=>f.payee_name).first
+		
+		if p
+			#if so, return it
+			special_payee = p
+		else
+			#if not, create it
+			special_payee = Payee.create(:name=>f.payee_name, :friendly_name=>f.payee_name)
+		end
+		
+		break 
+	  end
+	end
+  
+	return special_payee
+	
+  end
 end

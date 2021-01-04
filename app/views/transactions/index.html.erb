@@ -10,6 +10,7 @@
 <table border=1>
   <tr>
     <th>Date</th>
+	<th>Account</th>
 	<th>Payee</th>
     <th>Amount</th>
 	<th>Tag</th>
@@ -17,11 +18,12 @@
  
   <% @txs.each do |transaction| %>
     <tr>
-      <td><%= transaction.date %></td>  
+      <td><%= transaction.date %></td> 
+	  <td><%= transaction.account.name %></td>	  
 	  <% tx_payee = transaction.payee %>
 	  <td><%= best_in_place tx_payee, :friendly_name %></td>
       <td><%= number_to_currency(transaction.amount) %></td>
-	  <td><%= best_in_place transaction, :tag_list, :place_holder => "(tag)" %></td>
+	  <td><%= best_in_place transaction, :tag_list, :place_holder => "<b>** (TAG) **</b>" %></td>
 	  <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
 	  <td><%= link_to 'Delete', transaction_path(transaction),
               method: :delete,

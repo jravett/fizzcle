@@ -5,6 +5,7 @@ class User < ApplicationRecord
 # TODO fix this as possible SQL injection:
 	u = User.find_by(login: ln)
 	  return nil if u.nil?
+	  	  
 	  if pass==u.password
 	  	return u
 	  else
