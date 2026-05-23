@@ -15,16 +15,11 @@ class TransactionsController < ApplicationController
 		y = params[:date][:year]
 		session[:active_month] = m
 		session[:active_year]=y
-		logger.info 'switching to month # ' + m.to_s
-	end
+		end
 
 	@month=session[:active_month]
 	@year=session[:active_year]
-	
-	
-	logger.info 'using month # ' + @month.to_s
-	logger.info 'using year  # ' + @year.to_s
-	
+
 	# create a listing of all the transactions
 	@start_date = Date.new(@year.to_i, @month.to_i, 1)
 	@end_date = @start_date.end_of_month
@@ -35,29 +30,20 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-  	#find the correct transaction to edit
-	@tx = Transaction.find(params[:id])
-	logger.debug "JVR: editing this transaction-> #{@tx.attributes.inspect}"
-	#pass to the view for editing...
+    @tx = Transaction.find(params[:id])
   end
-  
+
   def update
-  
-  	tx = Transaction.find(params[:id])
-	logger.debug "JVR: saving this transaction-> #{params}"
-	logger.debug "JVR: saving this transaction-> #{transaction_params}"
-	
-	tx.update(transaction_params)
+    tx = Transaction.find(params[:id])
+    tx.update(transaction_params)
 	
 	p=tx.payee
 	p.last_tag = tx.tag_list.to_s
 	p.save
 	
-	respond_to do |format|	
-		
-		format.html do
-		  logger.debug "JVR: NOT doing ajax..."
+	respond_to do |format|
 
+		format.html do
 		  p.friendly_name = params[:payee][:friendly_name]
 		  p.save
 
@@ -66,7 +52,6 @@ class TransactionsController < ApplicationController
 		end
 
 		format.json do
-		  logger.debug "JVR: doing ajax...#{tx.tag_list.to_s}"
 		  head :no_content
 		end
 	  
@@ -75,14 +60,10 @@ class TransactionsController < ApplicationController
 
   def destroy
 	tx = Transaction.find(params[:id])
-	
-	p=tx.payee
-	
-	logger.debug "JVR: Destroying transaction ID #{tx.id}..."
+	p = tx.payee
 	tx.destroy
 	
-	if p.transactions.count==0
-		logger.debug "JVR: Also destroying payee #{p.name} because it no longer has any transactions"
+	if p.transactions.count == 0
 		p.destroy
 	end
 	

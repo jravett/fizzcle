@@ -1,16 +1,7 @@
 class User < ApplicationRecord
+  has_secure_password
 
-	def self.authenticate(ln, pass)
-#	  u=find(:first, :conditions=>["login = ?", login])
-# TODO fix this as possible SQL injection:
-	u = User.find_by(login: ln)
-	  return nil if u.nil?
-	  	  
-	  if pass==u.password
-	  	return u
-	  else
-	  	return nil
-	  end
-	end  
-	
+  def self.authenticate(ln, pass)
+    User.authenticate_by(login: ln, password: pass)
+  end
 end

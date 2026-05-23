@@ -15,7 +15,7 @@
 	  <td><%= best_in_place payee, :friendly_name %></td>
 	  <td><%= payee.created_at.strftime("%m/%d/%Y") %></td>
 	  <td><%= payee.last_tag %></td>
-	  <td><%= payee.transactions.count %></td>
+	  <td><%= payee.transactions_count %></td>
     </tr>
   <% end %>
 </table>

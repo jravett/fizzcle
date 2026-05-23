@@ -6,17 +6,19 @@ class UserController < ApplicationController
 
   def login
     if request.post?
-    	if session[:user] = User.authenticate(params[:login], params[:password])
-        	flash[:notice]  = "Login successful!"
-					redirect_to :controller => 'main', :action => 'index'
-			else
-       		flash[:notice] = "Login unsuccessfull"
+      user = User.authenticate(params[:login], params[:password])
+      if user
+        session[:user_id] = user.id
+        flash[:notice] = "Login successful!"
+        redirect_to :controller => 'main', :action => 'index'
+      else
+        flash[:notice] = "Login unsuccessful"
       end
     end
   end
 
   def logout
-    session[:user] = nil
+    session[:user_id] = nil
     flash[:notice] = 'Logged out'
     redirect_to :action => 'login'
   end

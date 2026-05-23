@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 	before_action :login_required
 	
 	def login_required
-    if session[:user]
+    if session[:user_id]
       return true
     end
     flash[:notice]='Please login to continue'
