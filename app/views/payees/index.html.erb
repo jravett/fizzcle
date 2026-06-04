@@ -1,23 +1,26 @@
 <h1>Payees</h1>
 
-<table border=1>
-  <tr>
-    <th>Name</th>
-    <th>Friendly Name</th>
-	<th>Created On</th>
-	<th>Last Tag</th>
-	<th>Transactions</th>
-  </tr>
- 
-  <% @payees.each do |payee| %>
+<table class="data-table">
+  <thead>
     <tr>
-      <td><%= payee.name %></td>
-	  <td><%= best_in_place payee, :friendly_name %></td>
-	  <td><%= payee.created_at.strftime("%m/%d/%Y") %></td>
-	  <td><%= payee.last_tag %></td>
-	  <td><%= payee.transactions_count %></td>
+      <th>Name</th>
+      <th>Friendly Name</th>
+      <th>Created On</th>
+      <th>Last Tag</th>
+      <th>Transactions</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @payees.each do |payee| %>
+      <tr>
+        <td><%= payee.name %></td>
+        <td><%= best_in_place payee, :friendly_name %></td>
+        <td><%= payee.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= payee.last_tag %></td>
+        <td><%= payee.transactions_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 

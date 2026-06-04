@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Fizzcle</title>
+  <head>
+    <title>Fizzcle</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  
-<style type="text/css">
+    <%= stylesheet_link_tag 'fizzcle' %>
+  </head>
+  <body>
 
-</style>
--->
-</head>
-<body>
-<h1>
-<%= image_tag "dollar_sign1.jpg" %>
-<b>Fizzcle</b>
-</h1>
-<hr />
+    <div class="login-page">
+      <div class="login-brand">Fizzcle</div>
+      <% if flash[:notice] %>
+        <div class="notice login-notice"><%= flash[:notice] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
 
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<%= yield %>
-<p>
-
-</body>
+  </body>
 </html>

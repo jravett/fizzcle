@@ -1,32 +1,33 @@
 <h1>Edit Transaction</h1>
 
-<%= form_for @tx do |form| %>
-<p>
-<fieldset>
-  <label>Date:</label>
-  <%= form.text_field :date %>
-</p>
+<%= form_for @tx, html: { class: "edit-form" } do |form| %>
+  <fieldset>
+    <div class="form-group">
+      <label>Date</label>
+      <%= form.text_field :date %>
+    </div>
 
-<p>  <label>Payee(friendly):</label>
-<%= fields_for @tx.payee do |payee_fields| %>
-  <%=payee_fields.text_field :friendly_name%>
-  <% end %>
-Originally: <i><%= @tx.payee.name %></i>
-</p>
+    <div class="form-group">
+      <label>Payee (friendly name)</label>
+      <%= fields_for @tx.payee do |payee_fields| %>
+        <%= payee_fields.text_field :friendly_name %>
+      <% end %>
+      <span class="form-note">Originally: <%= @tx.payee.name %></span>
+    </div>
 
-<p>
-  <label>Amount:</label>
-  <%= form.text_field :amount %>
-</p>
+    <div class="form-group">
+      <label>Amount</label>
+      <%= form.text_field :amount %>
+    </div>
 
-<p>
-  <label>Tags:</label>
-  <%= form.text_field :tag_list %>
-</p>
+    <div class="form-group">
+      <label>Tags</label>
+      <%= form.text_field :tag_list %>
+    </div>
 
-
-<%= form.submit "Submit"%>
-<%= link_to "cancel", transactions_path %>
-</fieldset>
-
+    <div class="form-actions">
+      <%= form.submit "Save Changes" %>
+      <%= link_to "Cancel", transactions_path %>
+    </div>
+  </fieldset>
 <% end %>

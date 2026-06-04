@@ -1,235 +1,443 @@
-/* css Zen Garden default style v1.02 */
-/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
+/* ================================================================
+   Fizzcle — Custom Stylesheet
+   ================================================================ */
 
-/* This file based on 'Tranquille' by Dave Shea */
-/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
-/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
+/* ----------------------------------------------------------------
+   Variables
+   ---------------------------------------------------------------- */
+:root {
+  --bg:           #0f172a;
+  --surface:      #1e293b;
+  --surface-2:    #293548;
+  --border:       #334155;
+  --text:         #e2e8f0;
+  --text-muted:   #94a3b8;
+  --accent:       #38bdf8;
+  --accent-hover: #0ea5e9;
+  --danger:       #f87171;
+  --radius:       6px;
+  --nav-height:   56px;
+}
 
-/* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
+/* ----------------------------------------------------------------
+   Reset & base
+   ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
-/* basic elements */
-html {
-	margin: 0;
-	padding: 0;
-	}
-body { 
-	font: georgia, sans-serif;
-	line-height: 1.88889;
-	color: #DCDCDC; 
-	margin: 0; 
-	padding: 0;
-	background-color: #121212;
-	}
-p { 
-	margin-top: 0; 
-	text-align: justify;
-	}
-h3 { 
-	font: italic normal 1.4em georgia, sans-serif;
-	letter-spacing: 1px; 
-	margin-bottom: 0; 
-	color: #7D775C;
-	}
-a:link { 
-	font-weight: bold; 
-	text-decoration: none; 
-	color: #B7A5DF;
-	}
-a:visited { 
-	font-weight: bold; 
-	text-decoration: none; 
-	color: #D4CDDC;
-	}
-a:hover, a:focus, a:active { 
-	text-decoration: underline; 
-	color: #9685BA;
-	}
-abbr {
-	border-bottom: none;
-	}
-	
-input[type=text],input[type=password],select {
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
 
-  background-color: lightgrey;
+h1, h2, h3 {
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 0;
+}
+
+h1 { font-size: 1.6rem; margin-bottom: 1.25rem; }
+h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+a:hover, a:focus {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+p { margin-top: 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* ----------------------------------------------------------------
+   Navigation
+   ---------------------------------------------------------------- */
+nav.main-nav {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+nav.main-nav .nav-brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  margin-right: 2rem;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+nav.main-nav .nav-brand:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+nav.main-nav .nav-links {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+nav.main-nav .nav-links a {
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  transition: color 0.15s, background-color 0.15s;
+  font-size: 0.9rem;
+}
+
+nav.main-nav .nav-links a:hover {
+  color: var(--text);
+  background-color: var(--surface-2);
+  text-decoration: none;
+}
+
+nav.main-nav .nav-logout a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  transition: color 0.15s;
+}
+
+nav.main-nav .nav-logout a:hover {
+  color: var(--danger);
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------------
+   Page wrapper & footer
+   ---------------------------------------------------------------- */
+main.page-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+footer.site-footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* ----------------------------------------------------------------
+   Flash notice
+   ---------------------------------------------------------------- */
+.notice {
+  background-color: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+}
+
+/* ----------------------------------------------------------------
+   Data tables
+   ---------------------------------------------------------------- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th {
+  background-color: var(--surface);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+
+.data-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--surface-2);
+}
+
+.danger-link {
+  color: var(--danger) !important;
+  font-size: 0.85rem;
+}
+
+.danger-link:hover {
+  color: #fca5a5 !important;
+}
+
+/* ----------------------------------------------------------------
+   Forms (filters and general inputs)
+   ---------------------------------------------------------------- */
+.filter-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.upload-form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+input[type=text],
+input[type=password],
+select {
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 0.45rem 0.7rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
 }
 
 input[type=submit] {
-  background-color: lightgrey;
+  background-color: var(--accent);
   border: none;
-  color: black;
-  padding: 4px 8px;
-  text-decoration: none;
-  margin: 4px 2px;
+  border-radius: var(--radius);
+  color: #0f172a;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  border-radius: 12px;
+  transition: background-color 0.15s;
 }
 
-
-/* specific divs */
-
-.notice{
-	color: crimson;
+input[type=submit]:hover {
+  background-color: var(--accent-hover);
 }
 
-.log-form {
-  min-width: 320px;
-  max-width: 475px;
-  background: grey;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  box-shadow: 5px 10px #888888;
+/* ----------------------------------------------------------------
+   Edit form
+   ---------------------------------------------------------------- */
+.edit-form {
+  max-width: 480px;
+}
+
+.edit-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-note {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
   display: block;
-  padding: 3em;
-  }
-  
-
-.MainMenu {
-  background-color: #383838;
-  text-align: center;
-  color: white; 
 }
 
-.page-wrapper { 
-	background: url(http://csszengarden.com/001/zen-bg.jpg) no-repeat top left; 
-	padding: 0 175px 0 110px;  
-	margin: 0; 
-	position: relative;
-	}
-
-.intro { 
-	min-width: 470px;
-	width: 100%;
-	}
-
-header h1 { 
-	background: transparent url(http://csszengarden.com/001/h1.gif) no-repeat top left;
-	margin-top: 10px;
-	display: block;
-	width: 219px;
-	height: 87px;
-	float: left;
-
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
-header h2 { 
-	background: transparent url(http://csszengarden.com/001/h2.gif) no-repeat top left; 
-	margin-top: 58px; 
-	margin-bottom: 40px; 
-	width: 200px; 
-	height: 18px; 
-	float: right;
-
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
-header {
-	padding-top: 20px;
-	height: 87px;
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-.summary {
-	clear: both; 
-	margin: 20px 20px 20px 10px; 
-	width: 160px; 
-	float: left;
-	}
-.summary p {
-	font: italic 1.1em/2.2 georgia; 
-	text-align: center;
-	}
+/* ----------------------------------------------------------------
+   Login page
+   ---------------------------------------------------------------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  padding: 2rem;
+}
 
-.preamble {
-	clear: right; 
-	padding: 0px 10px 0 10px;
-	}
-.supporting {	
-	padding-left: 10px; 
-	margin-bottom: 40px;
-	}
+.login-brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
 
-footer { 
-	text-align: center; 
-	}
-footer a:link, footer a:visited { 
-	margin-right: 20px; 
-	}
+.login-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
 
-.sidebar {
-	margin-left: 600px; 
-	position: absolute; 
-	top: 0; 
-	right: 0;
-	}
-.sidebar .wrapper { 
-	font: 10px verdana, sans-serif; 
-	background: transparent url(http://csszengarden.com/001/paper-bg.jpg) top left repeat-y; 
-	padding: 10px; 
-	margin-top: 150px; 
-	width: 130px; 
-	}
-.sidebar h3.select { 
-	background: transparent url(http://csszengarden.com/001/h3.gif) no-repeat top left; 
-	margin: 10px 0 5px 0; 
-	width: 97px; 
-	height: 16px; 
+.login-card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
 
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
-.sidebar h3.archives { 
-	background: transparent url(http://csszengarden.com/001/h5.gif) no-repeat top left; 
-	margin: 25px 0 5px 0; 
-	width:57px; 
-	height: 14px; 
+.login-card .form-group {
+  margin-bottom: 1.1rem;
+}
 
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
-.sidebar h3.resources { 
-	background: transparent url(http://csszengarden.com/001/h6.gif) no-repeat top left; 
-	margin: 25px 0 5px 0; 
-	width:63px; 
-	height: 10px; 
+.login-card input[type=text],
+.login-card input[type=password] {
+  width: 100%;
+}
 
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
+.login-card input[type=submit] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
 
+.login-notice {
+  max-width: 380px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
 
-.sidebar ul {
-	margin: 0;
-	padding: 0;
-	}
-.sidebar li {
-	line-height: 1.3em; 
-	background: transparent url(http://csszengarden.com/001/cr1.gif) no-repeat top center; 
-	display: block; 
-	padding-top: 5px; 
-	margin-bottom: 5px;
-	list-style-type: none;
-	}
-.sidebar li a:link {
-	color: #988F5E;
-	}
-.sidebar li a:visited {
-	color: #B3AE94;
-	}
+/* ----------------------------------------------------------------
+   Home page
+   ---------------------------------------------------------------- */
+.home-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  padding: 2rem 2.5rem;
+  max-width: 500px;
+}
 
+.home-card p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
 
-.extra1 {
-	background: transparent url(http://csszengarden.com/001/cr2.gif) top left no-repeat; 
-	position: absolute; 
-	top: 40px; 
-	right: 0; 
-	width: 148px; 
-	height: 110px;
-	}
+.home-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------------
+   Report index
+   ---------------------------------------------------------------- */
+.report-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 360px;
+}
+
+.report-link-card {
+  display: block;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+}
+
+.report-link-card:hover {
+  border-color: var(--accent);
+  background-color: var(--surface-2);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------------
+   Report results
+   ---------------------------------------------------------------- */
+.report-summary {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.report-tag {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.report-total {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.report-count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+}
