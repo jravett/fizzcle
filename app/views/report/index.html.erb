@@ -1,9 +1,7 @@
-<h1> This is the Reporting Page </h1>
+<h1>Reports</h1>
 
-<%#	<%= link_to "Monthly Summary", :action=>"summary" %>
-<p>
-<%= link_to "Tag Report", :action=>"tag" %>
-<p>
-<%= link_to "Monthly Summary", :action=>"monthly_summary" %>
-<p>
-<%= link_to "Year Tag Report", :action=>"year_tag" %>
+<div class="report-links">
+  <%= link_to "Tag Report",        { action: "tag" },             class: "report-link-card" %>
+  <%= link_to "Monthly Summary",   { action: "monthly_summary" }, class: "report-link-card" %>
+  <%= link_to "Year Tag Report",   { action: "year_tag" },        class: "report-link-card" %>
+</div>

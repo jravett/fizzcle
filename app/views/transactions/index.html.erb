@@ -1,33 +1,40 @@
 <h1>The Register</h1>
 
-<%= form_tag('/transactions', :method => :get) do %>
-	<%= select_month @start_date %>
-	<%= select_year(@start_date, :start_year => Date.today.year-3, :end_year => Date.today.year) %>
-	<%= submit_tag 'change date'%>
-<%end%>
-<p>
- 
-<table border=1>
-  <tr>
-    <th>Date</th>
-	<th>Account</th>
-	<th>Payee</th>
-    <th>Amount</th>
-	<th>Tag</th>
-  </tr>
- 
-  <% @txs.each do |transaction| %>
-    <tr>
-      <td><%= transaction.date %></td> 
-	  <td><%= transaction.account.name %></td>	  
-	  <% tx_payee = transaction.payee %>
-	  <td><%= best_in_place tx_payee, :friendly_name %></td>
-      <td><%= number_to_currency(transaction.amount) %></td>
-	  <td><%= best_in_place transaction, :tag_list, :place_holder => "<b>** (TAG) **</b>" %></td>
-	  <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-	  <td><%= link_to 'Delete', transaction_path(transaction),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+<div class="filter-form">
+  <%= form_tag('/transactions', :method => :get) do %>
+    <%= select_month @start_date %>
+    <%= select_year(@start_date, :start_year => Date.today.year-3, :end_year => Date.today.year) %>
+    <%= submit_tag 'change date' %>
   <% end %>
+</div>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Account</th>
+      <th>Payee</th>
+      <th>Amount</th>
+      <th>Tag</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @txs.each do |transaction| %>
+      <tr>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.account.name %></td>
+        <% tx_payee = transaction.payee %>
+        <td><%= best_in_place tx_payee, :friendly_name %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
+        <td><%= best_in_place transaction, :tag_list, :place_holder => "<b>** (TAG) **</b>" %></td>
+        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        <td><%= link_to 'Delete', transaction_path(transaction),
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: 'danger-link' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
