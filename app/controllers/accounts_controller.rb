@@ -12,6 +12,12 @@ class AccountsController < ApplicationController
   end
 
   def upload
+    if params[:ofx_file].blank?
+      flash[:notice] = "Please select an OFX file before uploading."
+      redirect_to action: :index
+      return
+    end
+
     ofx_data = params[:ofx_file]
     ofx = OfxParser::OfxParser.parse(ofx_data.read)
 
