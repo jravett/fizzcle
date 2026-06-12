@@ -2,11 +2,16 @@
 
 <div class="filter-form">
   <%= form_tag('/transactions', :method => :get) do %>
-    <%= select_month @start_date %>
-    <%= select_year(@start_date, :start_year => Date.today.year-3, :end_year => Date.today.year) %>
-    <%= submit_tag 'change date' %>
+    <%= select_month @start_date, {}, { onchange: 'this.form.submit()' } %>
+    <%= select_year(@start_date, { start_year: Date.today.year-3, end_year: Date.today.year }, { onchange: 'this.form.submit()' }) %>
+    <%= check_box_tag :untagged, '1', @untagged, onchange: 'this.form.submit()' %>
+    <%= label_tag :untagged, 'Untagged only' %>
   <% end %>
 </div>
+
+<% if @untagged %>
+  <p><em>Showing untagged transactions only</em></p>
+<% end %>
 
 <table class="data-table">
   <thead>

@@ -11,14 +11,14 @@ class TransactionsController < ApplicationController
 
 	if params[:date]
 		# switch to use a new month
-		m = params[:date][:month]
-		y = params[:date][:year]
-		session[:active_month] = m
-		session[:active_year]=y
-		end
+		session[:active_month] = params[:date][:month]
+		session[:active_year]  = params[:date][:year]
+		session[:untagged]     = params[:untagged] == '1'
+	end
 
-	@month=session[:active_month]
-	@year=session[:active_year]
+	@month    = session[:active_month]
+	@year     = session[:active_year]
+	@untagged = session[:untagged]
 
 	# create a listing of all the transactions
 	@start_date = Date.new(@year.to_i, @month.to_i, 1)
@@ -26,6 +26,7 @@ class TransactionsController < ApplicationController
 
 	# build the list of transactions
 	@txs = Transaction.where("date >= ? and date <= ?", @start_date, @end_date).order("date DESC")
+	@txs = @txs.untagged if @untagged
 	
   end
 
